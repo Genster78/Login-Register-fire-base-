@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loing_register/services/auth_service.dart';
 
 import '../components/input_text_filed.dart';
 import '../components/my_button.dart';
@@ -198,7 +199,7 @@ class _SignInPageState extends State<SignInPage> {
                 // google sign up button
                 SqureTile(
                   imagePath: "lib/images/google.png",
-                  onTap: () {},
+                  onTap: () => AuthService().signInWithGoogle(),
                 ),
 
                 const SizedBox(height: 50),
