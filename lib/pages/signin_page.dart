@@ -4,20 +4,19 @@ import '../components/input_text_filed.dart';
 import '../components/my_button.dart';
 import '../components/squre_tile.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  // text editing controller
+class _SignInPageState extends State<SignInPage> {
+  //text editing controller
   final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
   final emailController = TextEditingController();
 
-  void signUpUser() {}
+  void signInUser() {}
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +25,21 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 30),
-          
+
                 // sign in
                 const Text(
-                  'Sign-Up',
+                  'Sign-In',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-          
+
                 const SizedBox(height: 15),
-          
+
                 // divider
                 const Divider(
                   thickness: 2,
@@ -48,9 +47,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   indent: 25,
                   endIndent: 25,
                 ),
-          
+
                 const SizedBox(height: 20),
-          
+
                 // input fields container
                 Container(
                   height: 360,
@@ -70,26 +69,16 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   child: Column(
                     children: [
-                      // user name text field
-                      const TextInput(
-                        hintText: 'Enter user name',
-                        text: 'User Name :',
-                        controller: null,
-                        obscureText: false,
-                      ),
-          
-                      const SizedBox(height: 12),
-          
-                      // number text field
+                      // email text field
                       TextInput(
                         hintText: 'Enter email',
                         text: 'Email :',
                         controller: emailController,
                         obscureText: false,
                       ),
-          
+
                       const SizedBox(height: 12),
-          
+
                       // password text field
                       TextInput(
                         hintText: 'Enter password',
@@ -97,30 +86,33 @@ class _SignUpPageState extends State<SignUpPage> {
                         controller: passwordController,
                         obscureText: true,
                       ),
-          
-                      const SizedBox(height: 12),
-          
-                      // confirm password text field
-                      TextInput(
-                        hintText: 'Confirm password',
-                        text: 'Confirm Passowrd :',
-                        controller: confirmPasswordController,
-                        obscureText: true,
-                      ),
+
+                      const SizedBox(height: 5),
+
+                      //forgot password ?
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'Forgot Password?',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
-          
+
                 const SizedBox(height: 30),
-          
+
                 // sign up button
                 MyButton(
-                  name: 'Sign-Up',
-                  onTap: signUpUser,
+                  name: 'Sign-In',
+                  onTap: signInUser,
                 ),
-          
+
                 const SizedBox(height: 50),
-          
+
                 // or
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -149,35 +141,35 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-          
+
                 const SizedBox(height: 35),
                 // google sign up button
                 SqureTile(
                   imagePath: "lib/images/google.png",
                   onTap: () {},
                 ),
-          
+
                 const SizedBox(height: 50),
-          
+
                 // not a member? register now..
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Not a member ?',
-                        style: TextStyle(fontSize: 14),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Not a member ?',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      'Sign-Up now',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xff4B5043),
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(width: 5),
-                      Text(
-                        'Sign-Up now',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xff4B5043),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  )
+                    ),
+                  ],
+                )
               ],
             ),
           ),

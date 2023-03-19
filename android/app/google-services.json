@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1021742822385",
+    "project_id": "login-register-9fba5",
+    "storage_bucket": "login-register-9fba5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021742822385:android:5e1228057fd62b5b510a50",
+        "android_client_info": {
+          "package_name": "com.example.loing_register"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021742822385-9u4c84othkrebb2avv7v5hifpk9niu4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSFbDK5gUoTv_cB-epU3NKe-42J_nCl2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021742822385-9u4c84othkrebb2avv7v5hifpk9niu4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
