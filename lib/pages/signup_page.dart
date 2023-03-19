@@ -1,11 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../components/input_text_filed.dart';
 import '../components/my_button.dart';
 import '../components/squre_tile.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  final Function()? onTap;
+  const SignUpPage({
+    Key? key,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -17,7 +23,58 @@ class _SignUpPageState extends State<SignUpPage> {
   final confirmPasswordController = TextEditingController();
   final emailController = TextEditingController();
 
-  void signUpUser() {}
+// sign in user method
+  void signUpUser() async {
+    // show loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    // try sign in
+    try {
+      // check if password is confirmed
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+      } else {
+        // show error message, paasword not match
+        showErrorMessage('Password not match');
+      }
+      // pop the circle
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      // pop the circle
+      Navigator.pop(context);
+
+      // show error to user
+      showErrorMessage(e.code);
+    }
+  }
+
+  // wrong email message popup
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text(message),
+          actions: [
+            CupertinoDialogAction(
+              child: const Text('Ok'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
               // mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 30),
-          
+
                 // sign in
                 const Text(
                   'Sign-Up',
@@ -38,9 +95,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-          
+
                 const SizedBox(height: 15),
-          
+
                 // divider
                 const Divider(
                   thickness: 2,
@@ -48,9 +105,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   indent: 25,
                   endIndent: 25,
                 ),
-          
+
                 const SizedBox(height: 20),
-          
+
                 // input fields container
                 Container(
                   height: 360,
@@ -77,19 +134,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         controller: null,
                         obscureText: false,
                       ),
-          
+
                       const SizedBox(height: 12),
-          
-                      // number text field
+
+                      // email text field
                       TextInput(
                         hintText: 'Enter email',
                         text: 'Email :',
                         controller: emailController,
                         obscureText: false,
                       ),
-          
+
                       const SizedBox(height: 12),
-          
+
                       // password text field
                       TextInput(
                         hintText: 'Enter password',
@@ -97,9 +154,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         controller: passwordController,
                         obscureText: true,
                       ),
-          
+
                       const SizedBox(height: 12),
-          
+
                       // confirm password text field
                       TextInput(
                         hintText: 'Confirm password',
@@ -110,17 +167,17 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-          
+
                 const SizedBox(height: 30),
-          
+
                 // sign up button
                 MyButton(
                   name: 'Sign-Up',
                   onTap: signUpUser,
                 ),
-          
+
                 const SizedBox(height: 50),
-          
+
                 // or
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -149,35 +206,38 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-          
+
                 const SizedBox(height: 35),
                 // google sign up button
                 SqureTile(
                   imagePath: "lib/images/google.png",
                   onTap: () {},
                 ),
-          
+
                 const SizedBox(height: 50),
-          
+
                 // not a member? register now..
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Not a member ?',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        'Sign-Up now',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Already member ?',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: const Text(
+                        'Sign-In now',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 16,
                           color: Color(0xff4B5043),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  )
+                    ),
+                  ],
+                )
               ],
             ),
           ),

@@ -1,12 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../components/input_text_filed.dart';
 import '../components/my_button.dart';
 import '../components/squre_tile.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+  final Function()? onTap;
+  const SignInPage({
+    Key? key,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -55,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
           title: Text(message),
           actions: [
             CupertinoDialogAction(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () => Navigator.pop(context),
             ),
           ],
@@ -200,18 +206,21 @@ class _SignInPageState extends State<SignInPage> {
                 // not a member? register now..
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
+                  children:  [
+                    const Text(
                       'Not a member ?',
                       style: TextStyle(fontSize: 14),
                     ),
-                    SizedBox(width: 5),
-                    Text(
-                      'Sign-Up now',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xff4B5043),
-                        fontWeight: FontWeight.bold,
+                    const SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: const Text(
+                        'Sign-Up now',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Color(0xff4B5043),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

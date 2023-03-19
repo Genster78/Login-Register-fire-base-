@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:loing_register/pages/signin_page.dart';
+import 'package:loing_register/pages/signin_or_signup_page.dart';
 
 import 'home_page.dart';
 
@@ -19,7 +19,7 @@ class AuthPage extends StatelessWidget {
           }
           // is not logged in
           else {
-            return const SignInPage();
+            return const SignInOrSignUpPage();
           }
         },
       ),
