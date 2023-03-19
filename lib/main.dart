@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loing_register/pages/signup_page.dart';
+import 'package:loing_register/pages/signin_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SignUpPage(),
+      home: SignInPage(),
     );
   }
 }
