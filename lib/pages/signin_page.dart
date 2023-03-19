@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../components/input_text_filed.dart';
 import '../components/my_button.dart';
@@ -27,13 +28,40 @@ class _SignInPageState extends State<SignInPage> {
         );
       },
     );
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
 
-    // pop the circle
-    Navigator.pop(context);
+    // try sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      // pop the circle
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      // pop the circle
+      Navigator.pop(context);
+
+      // show error to user
+      showErrorMessage(e.code);
+    }
+  }
+
+  // wrong email message popup
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text(message),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('Ok'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
