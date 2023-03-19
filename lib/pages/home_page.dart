@@ -5,8 +5,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('logged in'),
+    return Scaffold(
+      body: Center(
+        child: Text('logged in'),
+      ),
     );
   }
 }

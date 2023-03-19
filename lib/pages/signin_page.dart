@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../components/input_text_filed.dart';
 import '../components/my_button.dart';
 import '../components/squre_tile.dart';
@@ -16,7 +16,12 @@ class _SignInPageState extends State<SignInPage> {
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
 
-  void signInUser() {}
+  void signInUser() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
